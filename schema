@@ -1,0 +1,45 @@
+CREATE TABLE country (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  code TEXT
+);
+
+CREATE TABLE author (
+  id INTEGER PRIMARY KEY,
+  first_name TEXT,
+  last_name TEXT,
+  country_id INTEGER,
+  FOREIGN KEY (country_id) REFERENCES country(id)
+);
+
+CREATE TABLE book (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  isbn TEXT,
+  author_id INTEGER,
+  FOREIGN KEY (author_id) REFERENCES author(id)
+);
+
+CREATE TABLE bookdetails (
+  id INTEGER PRIMARY KEY,
+  price DECIMAL,
+  discount INTEGER,
+  is_hard_copy BOOLEAN,
+  book_id INTEGER,
+  FOREIGN KEY (book_id) REFERENCES book(id)
+);
+
+INSERT INTO country VALUES (1, 'United States', 'USA');
+INSERT INTO country VALUES (2, 'Narnia', 'NAR');
+
+INSERT INTO author VALUES (1, 'Larson', 'Butamerican', 1);
+INSERT INTO author VALUES (2, 'Wild', 'Oscar', 2);
+INSERT INTO author VALUES (3, 'Fjord', 'Stoyovdesky', 2);
+
+INSERT INTO book VALUES (1, 'Dragon with the Girl Tattoo', '123-A', 1);
+INSERT INTO book VALUES (2, 'A Dorian of Picture Gray', '456-B', 2);
+INSERT INTO book VALUES (3, 'Punishment and Also Crime', '789-C', 3);
+
+INSERT INTO bookdetails VALUES (1, 20.00, 25, TRUE, 1);
+INSERT INTO bookdetails VALUES (2, 15.00, 30, FALSE, 2);
+INSERT INTO bookdetails VALUES (3, 10.00, 20, TRUE, 3);
